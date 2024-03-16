@@ -160,30 +160,33 @@ def calculator(expression: str) -> str:
 
 
 @tool_registry.register_tool
-def do_api_call(headers: dict) -> str:
+def get_api_content(url: str, headers: dict, method: str) -> str:
     """
-    If provided API specification and the required secret value, will do an API call.
+    If provided API specification and the required secret value, return response text.
+    Don't analyze the response, just return it.
 
     Args:
-        url (str): The URL of the webpage to scrape.
+        url (str): The URL of the API to call.
+        headers (dict): The header of request API.
+        method (str): The method to call the API.
 
     Returns:
-        str: The title and text of the webpage, separated by a newline.
+        str: The response from the API.
     """
     print(f"\n\n--------------------- Executing API Call -------------------\n\n")
-    # url = "https://dummyjson.com/products/1"
     print("headers", headers)
 
     try:
-        response = requests.get(headers.url)
+        method = getattr(requests, method.lower())
+        response = method(url, headers=headers)
+        print("response", response)
         if response.status_code == 200:
+            print("response.json", response.json())
             data = response.json()
             return data
         else:
             print(f"Error: {response.status_code}")
-            return None
+            return ""
     except requests.exceptions.RequestException as e:
         print(f"Request Error: {e}")
-        return None
-
-    return f"{title}\n\n{text}"
+        return ""

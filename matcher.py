@@ -23,7 +23,7 @@ def parse_data(data_string):
         item.strip(): "59a38afb45msh997d3e62cae8de4p15522djsn13a589fdd1aa"
         for item in data_list
     }  # Generate the JSON object
-    return json.dumps(parsed_data)  # Convert the dictionary to JSON string
+    return parsed_data
 
 
 def main():
@@ -32,33 +32,29 @@ def main():
 
     matcher_agent = MatcherAgent()
     api = matcher_agent.invoke("hearthstone")
-    print("Recommended API:", api.result)
+    print("Recommended API:", api)
 
     generator_agent = GeneratorAgent()
-    key = generator_agent.invoke(api.result)
+    key = generator_agent.invoke(json.dumps({"request": api.request}))
     print("Required input:", key.required)
 
     updated_key = parse_data(key.required)
     print("updated_key", type(updated_key), updated_key)
-    # print("api.result", type(api.result), api.result)
+    print("api.result", type(api), api)
 
-    # updated_key = json.loads(updated_key)
-    # print("updated_key", type(updated_key), updated_key)
+    updated_key.update(
+        {
+            "request": api.request,
+            "response": api.response,
+        }
+    )
+    print("combined", type(updated_key), updated_key)
 
-    # # Extracting JSON data
-    # start_index = api.result.find("{")
-    # end_index = api.result.rfind("}") + 1
-    # json_data = api.result[start_index:end_index]
-
-    # # Parsing JSON
-    # updated_api = json.loads(json_data)
-    # print("updated_api", type(updated_api), updated_api)
-
-    # action_agent = ActionAgent()
-    # action = action_agent.invoke(
-    #     f"I have this API specification: {api.result} and this is the key: {parse_data(key.required)}. Please help execute it."
-    # )
-    # print(action)
+    action_agent = ActionAgent()
+    action = action_agent.invoke(
+        f"I have this API specification: {updated_key} and the secret value included."
+    )
+    print(action)
 
 
 if __name__ == "__main__":

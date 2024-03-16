@@ -27,11 +27,10 @@ You will help to find the right api according to user needs.
 Here is your api database to search api:
 {db}
 
-Just return the json object. Nothing else, no description, nothing but json.
-
 *** Important Notice ***
 1. Make careful analysis of the task before choosing the api.
-2. No description please, I beg you. Just return json only.
+2. Just return the json object. Nothing else, no description, nothing but json.
+3. Don't write anything except json.
 """
 
 
@@ -54,23 +53,23 @@ class MatcherAgent(BaseAgent):
         )
         self.output_schema: Schema = Schema.create_schema(
             schema_name="MatcherAgentOutput",
-            result=(str, FieldInfo(description="The result api.")),
-            # name=(
-            #     str,
-            #     FieldInfo(description="The name of the api."),
-            # ),
-            # description=(
-            #     str,
-            #     FieldInfo(description="The description of the api."),
-            # ),
-            # request=(
-            #     str,
-            #     FieldInfo(description="The request of the api."),
-            # ),
-            # response=(
-            #     str,
-            #     FieldInfo(description="The response of the api."),
-            # ),
+            # result=(str, FieldInfo(description="The result api.")),
+            name=(
+                str,
+                FieldInfo(description="The name of the api."),
+            ),
+            description=(
+                str,
+                FieldInfo(description="The description of the api."),
+            ),
+            request=(
+                dict,
+                FieldInfo(description="The request of the api."),
+            ),
+            response=(
+                dict,
+                FieldInfo(description="The response of the api."),
+            ),
         )
 
         # Set up the LLM
@@ -84,12 +83,12 @@ class MatcherAgent(BaseAgent):
             llm=self.llm,
             input_schema=self.input_schema,
             output_schema=self.output_schema,
-            parse_to_json=False,
+            parse_to_json=True,
             is_tool_calling_agent=False,
         )
-        # self.use_response_format(
-        #     {
-        #         "type": "json_object",
-        #         "schema": TypeAdapter(self.output_schema).json_schema(),
-        #     }
-        # )
+        self.use_response_format(
+            {
+                "type": "json_object",
+                "schema": TypeAdapter(self.output_schema).json_schema(),
+            }
+        )
