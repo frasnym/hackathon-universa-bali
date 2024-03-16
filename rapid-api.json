@@ -1,0 +1,249 @@
+[
+    {
+        "name": "Hearthstone",
+        "description": "This API provides up to date Hearthstone data pulled directly from the game.",
+        "request": {
+            "method": "GET",
+            "url": "https://omgvamp-hearthstone-v1.p.rapidapi.com/info",
+            "headers": {
+                "X-RapidAPI-Key": "YOUR-API-KEY",
+                "X-RapidAPI-Host": "omgvamp-hearthstone-v1.p.rapidapi.com"
+            }
+        },
+        "response": {
+            "patch": "29.0.0.195635"
+        }
+    },
+    {
+        "name": "FlightMaster",
+        "description": "Access flight information for various airlines. Real-time updates on flight status, schedules, and more. Easy integration with comprehensive documentation.",
+        "request": {
+            "method": "GET",
+            "url": "https://flightmaster-api.p.rapidapi.com/flights",
+            "headers": {
+                "Api-Key": "YOUR-API-KEY",
+                "X-RapidAPI-Host": "flightmaster-api.p.rapidapi.com"
+            },
+            "params": {
+                "origin": "DEPARTURE_CITY",
+                "destination": "DESTINATION_CITY",
+                "departure_date": "DEPARTURE_DATE"
+            }
+        },
+        "response": {
+            "data": {
+                "flights": [
+                    {
+                        "flight_number": "AB123",
+                        "origin": "New York",
+                        "destination": "London",
+                        "departure_time": "2024-03-16T08:00:00",
+                        "arrival_time": "2024-03-16T13:00:00",
+                        "status": "On Time"
+                    },
+                    {
+                        "flight_number": "CD456",
+                        "origin": "London",
+                        "destination": "New York",
+                        "departure_time": "2024-03-16T14:00:00",
+                        "arrival_time": "2024-03-16T19:00:00",
+                        "status": "Delayed"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "SkyCinema",
+        "description": "Explore the latest movies, showtimes, and reviews. Get information on cast, plot, and ratings. Find theaters nearby and book tickets seamlessly.",
+        "request": {
+            "method": "GET",
+            "url": "https://skycinema-api.p.rapidapi.com/movies",
+            "headers": {
+                "Token": "YOUR-API-KEY",
+                "X-RapidAPI-Host": "skycinema-api.p.rapidapi.com"
+            },
+            "params": {
+                "title": "MOVIE_TITLE"
+            }
+        },
+        "response": {
+            "data": [
+                {
+                    "title": "Spider-Man: No Way Home",
+                    "release_date": "2023-12-17",
+                    "rating": "PG-13",
+                    "runtime": "148 mins",
+                    "genres": [
+                        "Action",
+                        "Adventure",
+                        "Fantasy"
+                    ],
+                    "cast": [
+                        "Tom Holland",
+                        "Zendaya",
+                        "Willem Dafoe"
+                    ],
+                    "plot": "Peter Parker's life is turned upside down when..."
+                },
+                {
+                    "title": "The Matrix Resurrections",
+                    "release_date": "2021-12-22",
+                    "rating": "R",
+                    "runtime": "148 mins",
+                    "genres": [
+                        "Action",
+                        "Sci-Fi"
+                    ],
+                    "cast": [
+                        "Keanu Reeves",
+                        "Carrie-Anne Moss",
+                        "Jada Pinkett Smith"
+                    ],
+                    "plot": "Neo is living a quiet life until he encounters Trinity..."
+                }
+            ]
+        }
+    },
+    {
+        "name": "WeatherPro",
+        "description": "Get accurate weather forecasts for any location worldwide. Detailed information including temperature, humidity, wind speed, and more.",
+        "request": {
+            "method": "GET",
+            "url": "https://weatherpro-api.p.rapidapi.com/weather",
+            "headers": {
+                "App-Key": "YOUR-API-KEY",
+                "X-RapidAPI-Host": "weatherpro-api.p.rapidapi.com"
+            },
+            "params": {
+                "location": "CITY_NAME"
+            }
+        },
+        "response": {
+            "data": {
+                "location": "New York",
+                "temperature": 20,
+                "humidity": 60,
+                "wind_speed": 10,
+                "weather_description": "Partly Cloudy"
+            }
+        }
+    },
+    {
+        "name": "StockMarketPro",
+        "description": "Access real-time stock market data. Get information on stock prices, trading volume, historical data, and more.",
+        "request": {
+            "method": "GET",
+            "url": "https://stockmarket-api.p.rapidapi.com/stocks",
+            "headers": {
+                "Authorization": "Bearer YOUR-API-TOKEN",
+                "X-RapidAPI-Host": "stockmarket-api.p.rapidapi.com"
+            },
+            "params": {
+                "symbol": "STOCK_SYMBOL"
+            }
+        },
+        "response": {
+            "data": {
+                "symbol": "AAPL",
+                "price": 150.25,
+                "volume": 5000000,
+                "change": "+2.50",
+                "percent_change": "+1.68%",
+                "history": [
+                    {
+                        "date": "2024-03-15",
+                        "price": 148.75
+                    },
+                    {
+                        "date": "2024-03-14",
+                        "price": 147.50
+                    },
+                    {
+                        "date": "2024-03-13",
+                        "price": 145.80
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "RecipeFinder",
+        "description": "Discover delicious recipes from around the world. Search by ingredients, cuisine type, dietary restrictions, and more.",
+        "request": {
+            "method": "GET",
+            "url": "https://recipefinder-api.p.rapidapi.com/recipes",
+            "headers": {
+                "X-RapidAPI-Key": "YOUR-API-KEY",
+                "X-RapidAPI-Host": "recipefinder-api.p.rapidapi.com"
+            },
+            "params": {
+                "query": "Pasta Carbonara",
+                "cuisine": "Italian",
+                "diet": "Vegetarian"
+            }
+        },
+        "response": {
+            "data": [
+                {
+                    "title": "Authentic Pasta Carbonara",
+                    "cuisine": "Italian",
+                    "ingredients": [
+                        "Spaghetti",
+                        "Eggs",
+                        "Bacon",
+                        "Parmesan Cheese",
+                        "Black Pepper"
+                    ],
+                    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+                    "image": "https://example.com/pasta_carbonara.jpg"
+                },
+                {
+                    "title": "Classic Spaghetti Carbonara",
+                    "cuisine": "Italian",
+                    "ingredients": [
+                        "Spaghetti",
+                        "Eggs",
+                        "Pancetta",
+                        "Parmesan Cheese",
+                        "Black Pepper"
+                    ],
+                    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+                    "image": "https://example.com/spaghetti_carbonara.jpg"
+                }
+            ]
+        }
+    },
+    {
+        "name": "NewsHub",
+        "description": "Stay updated with the latest news from around the globe. Get breaking news, headlines, and articles on various topics.",
+        "request": {
+            "method": "GET",
+            "url": "https://newshub-api.p.rapidapi.com/news",
+            "headers": {
+                "X-RapidAPI-Key": "YOUR-API-KEY",
+                "X-RapidAPI-Host": "newshub-api.p.rapidapi.com"
+            },
+            "params": {
+                "category": "Technology",
+                "country": "US"
+            }
+        },
+        "response": {
+            "data": [
+                {
+                    "title": "Apple Announces New MacBook Pro Models",
+                    "source": "TechCrunch",
+                    "published_at": "2024-03-16T09:00:00",
+                    "url": "https://techcrunch.com/apple-new-macbook-pro"
+                },
+                {
+                    "title": "Google Unveils Latest Pixel Smartphone",
+                    "source": "CNN",
+                    "published_at": "2024-03-16T08:30:00",
+                    "url": "https://www.cnn.com/google-latest-pixel-smartphone"
+                }
+            ]
+        }
+    }
+]
