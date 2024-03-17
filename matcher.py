@@ -86,7 +86,18 @@ def GetResult(req: dict) -> dict:
     print("code_agent", raw_code)
 
     req["result"] = raw_code.response
+
+    # Regular expression pattern to extract the code snippet
+    pattern = r"```python(.*?)```"
+
+    # Search for the pattern in the snippet
+    match = re.search(pattern, raw_code.response, re.DOTALL)
+
     req["func"] = raw_code.response
+    if match:
+        code_snippet = match.group(1).strip()
+        req["func"] = code_snippet
+
     return req
 
 
