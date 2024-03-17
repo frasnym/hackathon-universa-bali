@@ -26,6 +26,63 @@ def parse_data(data_string):
     return parsed_data
 
 
+def GetAPI(req: dict) -> dict:
+    print("==GetAPI Called==")
+    matcher_agent = MatcherAgent()
+    api = matcher_agent.invoke(req["task"])
+    print("Recommended API:", api)
+
+    req["api"] = {
+        "name": api.name,
+        "description": api.description,
+        "request": api.request,
+        "response": api.response,
+    }
+
+    generator_agent = GeneratorAgent()
+    key = generator_agent.invoke(json.dumps({"request": req["api"]["request"]}))
+    print("Required input:", key.required)
+
+    req["secret"] = key.required
+
+    return req
+
+
+def replace_api_key(data: dict, key_name: str, new_key: str) -> dict:
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if isinstance(value, dict):
+                replace_api_key(value, key_name, new_key)
+            elif isinstance(value, list):
+                for item in value:
+                    replace_api_key(item, key_name, new_key)
+            elif value == key_name:
+                data[key] = new_key
+
+    print("data", data)
+
+
+def GetResult(req: dict) -> dict:
+    print("==GetResult Called==")
+
+    api = req["api"]
+
+    for key, value in req["secret_provided"].items():
+        print("key", key)
+        print("value", value)
+        replace_api_key(api, key, value)
+
+    req["api"] = api
+
+    action_agent = ActionAgent()
+    action = action_agent.invoke(
+        f"I have this API specification: {req} and the secret value included."
+    )
+    print("action", action)
+    req["result"] = action.response
+    return req
+
+
 def main():
 
     # task = gather_information()
