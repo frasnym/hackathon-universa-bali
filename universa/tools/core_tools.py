@@ -160,7 +160,7 @@ def calculator(expression: str) -> str:
 
 
 @tool_registry.register_tool
-def get_api_content(url: str, headers: dict, method: str) -> str:
+def get_api_content(url: str, headers: dict, method: str, params: dict) -> str:
     """
     If provided API specification and the required secret value, return response text.
     Don't analyze the response, just return it.
@@ -175,10 +175,11 @@ def get_api_content(url: str, headers: dict, method: str) -> str:
     """
     print(f"\n\n--------------------- Executing API Call -------------------\n\n")
     print("headers", headers)
+    print("params", params)
 
     try:
         method = getattr(requests, method.lower())
-        response = method(url, headers=headers)
+        response = method(url, headers=headers, params=params)
         print("response", response)
         if response.status_code == 200:
             print("response.json", response.json())

@@ -13,6 +13,22 @@
         "response": {}
     },
     {
+        "name": "Urban Dictionary",
+        "description": "Urban Dictionary is the dictionary you write. This is the unofficial secret API.",
+        "request": {
+            "method": "GET",
+            "url": "https://mashape-community-urban-dictionary.p.rapidapi.com/define",
+            "headers": {
+                "X-RapidAPI-Host": "mashape-community-urban-dictionary.p.rapidapi.com",
+                "X-RapidAPI-Key": "YOUR-API-KEY"
+            },
+            "params": {
+                "term": "YOUR-TERM"
+            }
+        },
+        "response": {}
+    },
+    {
         "name": "FlightMaster",
         "description": "Access flight information for various airlines. Real-time updates on flight status, schedules, and more. Easy integration with comprehensive documentation.",
         "request": {
