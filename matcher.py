@@ -1,7 +1,8 @@
-import json
+import json, re
 from datetime import datetime
 
 from universa.agents.action_agent import ActionAgent
+from universa.agents.code_agent import CodeAgent
 from universa.agents.generator_agent import GeneratorAgent
 from universa.agents.matcher_agent import MatcherAgent
 
@@ -74,12 +75,18 @@ def GetResult(req: dict) -> dict:
 
     req["api"] = api
 
-    action_agent = ActionAgent()
-    action = action_agent.invoke(
-        f"I have this API specification: {req} and the secret value included."
-    )
-    print("action", action)
-    req["result"] = action.response
+    # action_agent = ActionAgent()
+    # action = action_agent.invoke(
+    #     f"I have this API specification: {req} and the secret value included."
+    # )
+    # print("action", action)
+
+    code_agent = CodeAgent()
+    raw_code = code_agent.invoke(json.dumps(req))
+    print("code_agent", raw_code)
+
+    req["result"] = raw_code.response
+    req["func"] = raw_code.response
     return req
 
 
