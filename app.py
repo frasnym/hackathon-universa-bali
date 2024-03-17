@@ -8,6 +8,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+app.config["CORS_HEADERS"] = "application/json"
 
 
 @app.route("/api/matchers", methods=["POST"])
