@@ -1,9 +1,13 @@
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request
 
 import matcher
-from universa.agents.matcher_agent import MatcherAgent
+
+from flask import Flask
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/api/matchers", methods=["POST"])
